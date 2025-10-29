@@ -2,30 +2,15 @@ name: CI
 
 on:
   push:
-  pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  prevent-direct-push:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18, 20]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
-
-      - name: Run tests
-        run: npm test
-
-      - name: Run example script
-        run: node index.js
-
-
+      - name: Prevent direct push to main
+        run: |
+          echo "❌ Direct pushes to main branch are not allowed!"
+          echo "Please create a pull request instead."
+          exit 1
