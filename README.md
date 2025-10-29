@@ -10,6 +10,6 @@ This is a minimal Node.js project with a single function and test, plus a basic 
 npm test
 ```
 
-### CI location
+### CI location testing
 
 Workflow file: `.github/workflows/ci.yml`
